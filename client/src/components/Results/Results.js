@@ -10,7 +10,21 @@ const Results = props => (
           <div className="panel-heading">
             <h3 className="panel-title"><strong><i className="fa fa-table" />   Top Articles</strong></h3>
           </div>
-          <div className="panel-body" id="well-section">Articles will go here....</div>
+          <div className="panel-body" id="well-section">
+
+            {props.articleFeed.length ? (
+              <ul className="list-group">
+                  {props.articleFeed.map(article => (
+
+                <li className="list-group-item">
+                    <h3>{article.headline.main}</h3>
+                    <p>{article.snippet}</p>
+                    <a rel="noreferrer noopener" target="_blank" href={article.web_url}>Go to article!</a>
+                </li>
+                ))}
+              </ul>
+            ) : (<h3>No Results to Display</h3>)}
+          </div>
         </div>
       </div>
     </div>
@@ -19,4 +33,4 @@ const Results = props => (
 );
 
 
-export default Results;
+export default Results; 
