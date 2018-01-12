@@ -9,25 +9,6 @@ const SUFFIX = "&q="
 export default {
   search: function(query) {
     return axios.get(BASEURL + APIKEY + SUFFIX + query)
-    .then(function (response) {
-      console.log(response.data.response.docs);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+
   }
 };
-
-
-  //works!!!
-
-
-
-// return axios.get(BASEURL + APIKEY + SUFFIX + query)
-// .then(res => {
-//   const results = res;
-//   this.setState({ results });
-// })
-// .catch(function (error) {
-//   console.log(error);
-// });

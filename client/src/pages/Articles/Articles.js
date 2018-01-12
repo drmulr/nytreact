@@ -5,6 +5,7 @@ import Results from '../../components/Results';
 import Saved from '../../components/Saved';
 import Footer from '../../components/Footer';
 import API from "../../utils/API";
+import Seed from "../../utils/seed";
 
 
 
@@ -17,14 +18,32 @@ class Articles extends Component {
       results: [],
       combinedSearch: ""
     };
-
+  
+  // var seed = [
+  //   {
+  //       title: 'Ali Sells Jersey House And Moves to Chicago',
+  //       date: '1974-07-18T00:00:00Z',
+  //       url: 'http://query.nytimes.com/gst/abstract.html?res=9A0DE5D8173FEF34BC4052DFB166838F669EDE'
+  //     },
+  //     {
+  //       title: 'Ali Sells Jersey House And Moves to Chicago',
+  //       date: '1974-07-18T00:00:00Z',
+  //       url: 'http://query.nytimes.com/gst/abstract.html?res=9A0DE5D8173FEF34BC4052DFB166838F669EDE'
+  //     },
+  //     {
+  //       title: 'Ali Sells Jersey House And Moves yto Chicago',
+  //       date: '1974-07-18T00:00:00Z',
+  //       url: 'http://query.nytimes.com/gst/abstract.html?res=9A0DE5D8173FEF34BC4052DFB166838F669EDE'
+  //     }
+  //   ]
   // =========================================================
   //   CAPTURING DATA FROM SEARCH FIELDS
   // =========================================================
 
   searchNYT = query => {
       API.search(query)
-      .then(res => this.setState({ results: res }))
+      .then(response =>
+        this.setState({ results: response.data.response.docs, search: "", startYear: "", endYear: "" }))
       .catch(err => console.log(err));
   };
 
@@ -36,7 +55,6 @@ class Articles extends Component {
     });
   };
 
-  // When the form is submitted, search the NYT API for `this.state.combinedSearch`
   //mutating state directly...need not do that...change.
   handleFormSubmit = event => {
     event.preventDefault();
@@ -50,10 +68,8 @@ class Articles extends Component {
       this.state.endYear += "1231";
       this.state.combinedSearch = this.state.combinedSearch + "&end_date=" + this.state.endYear;
     }
-
     this.searchNYT(this.state.combinedSearch);
-    console.log(this.state.results);
-  
+    
   };
 
   // =========================================================
